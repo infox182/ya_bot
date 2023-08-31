@@ -1,10 +1,10 @@
 import kb
 from config import dp, bot
 from aiogram import types
-from aiogram import F
 import os 
 
 CURRENT_PATH = os.getcwd()
+
 
 @dp.message_handler(commands=["start"])
 async def start(message: types.Message):
@@ -30,7 +30,6 @@ async def current_selfie(message: types.Message):
     await bot.send_photo(
         message.chat.id,
         photo = file_path,
-        reply_markup = kb.menu,
         caption="Test caption!",
     )
 
@@ -41,35 +40,33 @@ async def school_photo(message: types.Message):
     await bot.send_photo(
         message.chat.id,
         photo = file_path,
-        reply_markup = kb.menu,
         caption="Test caption!",
     )
 
 @dp.message_handler(commands=["my_hobby"])
 async def my_hobby(message: types.Message):
     await message.answer(
-        "Играю в баскетбол",
-        reply_markup = kb.menu
+        "Играю в баскетбол"
     )
     
-@dp.callback_query(F.data.in_(['gpt_say']))
+@dp.callback_query_handler()
 async def gpt_say(callback: types.CallbackQuery):
-    await callback.answer(
-        "GPT",
-        reply_markup = kb.menu
-    )
+    if callback.data == 'gpt_say':
+        await callback.answer(
+            "GPT"
+        )
     
     
-@dp.callback_query(F.data.in_(['sql_say']))
+@dp.callback_query_handler()
 async def sql_say(callback: types.CallbackQuery):
-    await callback.answer(
-        "SQL",
-        reply_markup = kb.menu
-    )
+    if callback.data == 'sql_say':
+        await callback.answer(
+            "SQL"
+        )
     
-@dp.callback_query(F.data.in_(['love_say']))
+@dp.callback_query_handler()
 async def love_say(callback: types.CallbackQuery):
-    await callback.answer(
-        "LOVE",
-        reply_markup = kb.menu
-    )
+    if callback.data == 'love_say':
+        await callback.answer(
+            "LOVE"
+        )
