@@ -29,7 +29,7 @@ async def current_selfie(message: types.Message):
     file_path = f'{CURRENT_PATH}/data_files/selfie.jpg'
     await bot.send_photo(
         message.chat.id,
-        photo = file_path,
+        photo = open(file_path,'rb'),
         caption="Test caption!",
     )
 
@@ -39,7 +39,7 @@ async def school_photo(message: types.Message):
     file_path = f'{CURRENT_PATH}/data_files/school.jpg'
     await bot.send_photo(
         message.chat.id,
-        photo = file_path,
+        photo = open(file_path,'rb'),
         caption="Test caption!",
     )
 
